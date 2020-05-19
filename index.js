@@ -2,22 +2,28 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const Post = require('./Schemas/PostSchemas')
+const Comment = require('./Schemas/PostSchemas')
 require('dotenv/config')
 
 app.use(bodyParser.json());
 
 //ROUTES
 
-app.get('/work-effort', async (req, res) => {
+app.get('/work-effort/:work_effort_id/comments', async (req, res) => {
+    try { 
+    var comment  = await Comment.find({ work_effort_id: req.params.work_effort_id });
+    res.json(comment)
+    } catch (err) {
+        res.json({ message: err})
+    }
 
 })
 
 app.post('/work-effort/:work_effort_id/comments', async (req, res) => {
     const work_effort_id  = req.params.work_effort_id
-    const comment = new Post({
+    const comment = new Comment({
         id: req.body.id,
-        work_efford_id: work_effort_id,
+        work_effort_id: work_effort_id,
         comment :req.body.comment,
         left_at : req.body.left_at,
         user_id: req.body.user_id
@@ -25,7 +31,7 @@ app.post('/work-effort/:work_effort_id/comments', async (req, res) => {
     try {
         const savedComment = await comment.save();
         res.json(savedComment)
-    }catch (err){
+    } catch (err){
         res.json({ message: err})
 
     }

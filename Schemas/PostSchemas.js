@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const PostCommentSchema = mongoose.Schema({
-    work_efford_id: {
+    work_effort_id: {
         type: Number,
         required: true
     },
@@ -19,4 +19,4 @@ const PostCommentSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Posts', PostCommentSchema)
+module.exports = mongoose.model('Comments', PostCommentSchema)
