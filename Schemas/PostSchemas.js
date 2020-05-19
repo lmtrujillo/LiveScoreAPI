@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const PostCommentSchema = mongoose.Schema({
+var PostCommentSchema = mongoose.Schema({
     work_effort_id: {
         type: Number,
         required: true

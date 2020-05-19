@@ -20,10 +20,8 @@ app.get('/work-effort/:work_effort_id/comments', async (req, res) => {
 })
 
 app.post('/work-effort/:work_effort_id/comments', async (req, res) => {
-    const work_effort_id  = req.params.work_effort_id
     const comment = new Comment({
-        id: req.body.id,
-        work_effort_id: work_effort_id,
+        work_effort_id : req.params.work_effort_id,
         comment :req.body.comment,
         left_at : req.body.left_at,
         user_id: req.body.user_id
@@ -54,7 +52,7 @@ app.delete('/work-effort/:work_effort_id/comments/:comment_id', async (req, res)
 mongoose.connect(
 process.env.DB_CONNECTION, 
 { useNewUrlParser: true }, 
-() => console.log('Connected to Data Base')
+() => console.log('Connected to Database')
 )
 
 
