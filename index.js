@@ -37,6 +37,16 @@ app.post('/work-effort/:work_effort_id/comments', async (req, res) => {
     }
 })
 
+app.delete('/work-effort/:work_effort_id/comments/:comment_id', async (req, res) => {
+    try {
+        const removedComment = await Comment.remove({work_effort_id:req.params.work_effort_id ,_id:req.params.comment_id});
+        res.json(removedComment)
+    } catch (err){
+        res.json({ message: err})
+
+    }
+})
+
 
 
 //Connect to DB
